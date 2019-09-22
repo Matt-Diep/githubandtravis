@@ -6,3 +6,12 @@ script:
   - docker build -t mattdiepcpp/node .
   - docker images mattdiepcpp/node
   
+before_deploy:
+  - docker login -u mattdiepcpp -p $SECRET_KEY
+
+deploy:
+  provider: script
+  script: docker push mattdiepcpp/node
+  on:
+    branch: master
+    
